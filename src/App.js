@@ -6,10 +6,7 @@ import './Style.css';
 import Login from './files/Login'; 
 import Signin from './files/Sign-in'; 
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' ;  
-// import { Sign } from 'crypto';
-
-// wat we will write it will ome o wesite
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' ;   
 
 function App() {
   
