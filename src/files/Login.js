@@ -18,8 +18,8 @@ export default function Lo() {
     try {
 
 
-      // axios.post('https://crud-back-nine.vercel.app/login/', { email_id: email_id, password: password })
-      axios.post('http://localhost:800/login/', { email_id: email_id, password: password }, { withCredentials: true })
+      axios.post('https://crud-back-nine.vercel.app/login/', { email_id: email_id, password: password })
+      // axios.post('http://localhost:800/login/', { email_id: email_id, password: password }, { withCredentials: true })
         .then(res => {
           // console.log(res);
           if (res.data.Status === "Success") {

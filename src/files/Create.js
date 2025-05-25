@@ -16,8 +16,8 @@ export default function Create() {
     const se = async (event) => { 
       event.preventDefault() ;
       try{ 
-        // await axios.post('https://crud-back-nine.vercel.app/create/', {sno : sno , user_id : user_id, name : name , age : age} ) 
-        await axios.post('http://localhost:800/create/', {sno : sno , user_id : user_id, name : name , age : age} ) 
+        await axios.post('https://crud-back-nine.vercel.app/create/', {sno : sno , user_id : user_id, name : name , age : age} ) 
+        // await axios.post('http://localhost:800/create/', {sno : sno , user_id : user_id, name : name , age : age} ) 
           av('/studs');
       }
       catch(err){

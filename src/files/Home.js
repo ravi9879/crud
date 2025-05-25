@@ -12,10 +12,10 @@ export default function Studs() {
   // console.log(user_id) ;
 
   useEffect(() => {
-    // axios.get(`https://crud-back-nine.vercel.app/studs/${user_id}`).then((res) => { 
+    axios.get(`https://crud-back-nine.vercel.app/studs/${user_id}`).then((res) => { 
     // const user = String(document.cookie.split(";")[1].slice(7, document.cookie[1].length))  ; 
     // console.log(user) ;
-    axios.get(`http://localhost:800/studs/${user_id}`).then((res) => {
+    // axios.get(`http://localhost:800/studs/${user_id}`).then((res) => {
       setstud(res.data); 
       // let x = document.cookie ;
       // console.log(x.split(";")[1].slice(7, x.length) );
