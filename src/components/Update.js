@@ -8,7 +8,7 @@ export default function Update() {
   const [field, setField] = useState("");
   const [update, setUpdate] = useState("");
   const [loading, setLoading] = useState(false);
-  const user_id = window.localStorage.getItem("token");
+  const user_id = window.localStorage.getItem("token"); 
   const av = useNavigate();
 
   const se = async (event) => {
@@ -29,6 +29,26 @@ export default function Update() {
       av("/error");
     }
   };
+
+  if (loading) {
+    return (
+      <div
+        className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-light"
+        style={{ zIndex: 2000, opacity: 0.85 }}
+      >
+        <div className="text-center">
+          <div
+            className="spinner-border text-primary"
+            style={{ width: "4rem", height: "4rem" }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <div className="mt-3 fw-semibold text-primary">Logging in...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

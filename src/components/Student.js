@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Url from "../stores/Url";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 function Student() {
   const [stud, setstud] = useState([]);
@@ -9,33 +10,63 @@ function Student() {
   const av = useNavigate();
   const roll_no = window.localStorage.getItem("token");
   const [studentImageUrl, setStudentImageUrl] = useState("");
+  const [loading, setLoading] = useState(false); 
 
   const handleImageUpload = () => {};
 
   useEffect(() => {
+    setLoading(true) ;
     axios
       .get(`${Url}/student-data/${roll_no}`)
       .then((res) => {
+        setLoading(false) ;
         setstud(res.data);
       })
       .catch((err) => {
+        setLoading(false) ;
         console.log("error at client side", err);
         av("/error");
       });
   }, []);
 
   useEffect(() => {
+    setLoading(true) ;
     axios
       .get(`${Url}/student-course-data/${roll_no}`)
       .then((res) => {
         setcourses(res.data);
+        setLoading(false) ;
       })
       .catch((err) => {
+        setLoading(false) ;
         console.log("error at client side", err);
         av("/error");
       });
   }, []);
+
+  if (loading) {
+    return (
+      <div
+        className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-light"
+        style={{ zIndex: 2000, opacity: 0.85 }}
+      >
+        <div className="text-center">
+          <div
+            className="spinner-border text-primary"
+            style={{ width: "4rem", height: "4rem" }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <div className="mt-3 fw-semibold text-primary">Loading...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
+    <>
+    <NavBar></NavBar>
     <div className="container py-5">
       <div className="row justify-content-center">
         <div className="col-md-8">
@@ -140,6 +171,7 @@ function Student() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

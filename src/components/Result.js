@@ -1,7 +1,10 @@
 import React from "react";
+import NavBar from "./NavBar";
 
 function Result() {
   return (
+    <>
+    <NavBar></NavBar>
     <div className="d-flex align-items-center justify-content-center min-vh-100 bg-light">
       <div
         className="card shadow p-4 text-center"
@@ -18,6 +21,7 @@ function Result() {
         </p>
       </div>
     </div>
+    </>
   );
 }
 

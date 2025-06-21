@@ -1,16 +1,19 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Url from "../stores/Url";
+import NavBar from "./NavBar";
 
 export default function CreateCourse() {
   const name = useRef();
   const courseId = useRef();
   const av = useNavigate();
+  const [loading, setLoading] = useState(false); 
 
   const id = window.localStorage.getItem("token");
   const se = async (event) => {
     event.preventDefault();
+    setLoading(true) ;
     try {
       await axios.post(`${Url}/add-teacher-course/`, {
         id: id,
@@ -22,8 +25,34 @@ export default function CreateCourse() {
       console.log("error at client side", err);
       av("/error");
     }
+    finally{
+      setLoading(false) ;
+    }
   };
+
+  if (loading) {
+    return (
+      <div
+        className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-light"
+        style={{ zIndex: 2000, opacity: 0.85 }}
+      >
+        <div className="text-center">
+          <div
+            className="spinner-border text-primary"
+            style={{ width: "4rem", height: "4rem" }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <div className="mt-3 fw-semibold text-primary">Processing...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
+    <>
+    <NavBar></NavBar>
     <div className="d-flex align-items-center justify-content-center min-vh-100 bg-light">
       <div className="card shadow p-4" style={{ minWidth: 350, maxWidth: 400 }}>
         <h2 className="card-title text-center mb-4 text-primary">Add Course</h2>
@@ -56,5 +85,6 @@ export default function CreateCourse() {
         </form>
       </div>
     </div>
+    </>
   );
 }
